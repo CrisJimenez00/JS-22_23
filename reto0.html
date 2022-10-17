@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <p id="resultado"></p>
+    <input type="text" id="ciudad" value="ESTE">
+    <button onclick="dale()">ejecuta sin Find</button>
+    <button onclick="daleFind()">ejecuta con Find</button>
+
+    <script>
+        let numeros = [{ cp: 29680, ciudad: 'ESTEPONA' }, { cp: 29601, ciudad: 'MARBELLA' }];
+
+        function dale() {
+            document.getElementById("resultado").innerHTML = "";
+
+
+            numeros.map((dato) => {
+                let city = document.getElementById("ciudad").value;
+                if (dato.ciudad.includes(city.toUpperCase()))
+                    document.getElementById("resultado").innerHTML = dato.ciudad + "-" + dato.cp;
+            });
+
+
+        }
+        function daleFind() {
+            document.getElementById("resultado").innerHTML = "";
+
+
+            numeros.find(() => {
+                let city = document.getElementById("ciudad").value;
+                let dato = numeros.find(e => e.ciudad.includes(city));
+                if (typeof (dato) != undefined) document.getElementById("resultado").innerHTML = dato.ciudad + "-" + dato.cp;
+            });
+
+        }
+    </script>
+
+</body>
+
+</html>

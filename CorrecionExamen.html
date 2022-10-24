@@ -1,0 +1,80 @@
+<html>
+
+<head>
+    <title>retos JavaScript</title>
+</head>
+
+<body>
+    <h1>retos JavaScript</h1>
+    <script>
+        var cars = ["Saab", "Volvo", "BMW", ["Honda", "Toyota", ["Lexus",
+            "Mercedes", "Lada"], "Hyunday"]];
+        var carrakos = ["Chevrolet", "Tesla", "BMW", ["Honda",
+            "Infiniti", ["Lexus", "Mercedes", "Kia"], "Hyunday"], ["Mazda",
+                "Mercedes", "Jeep", ["KTM", "Nissan", "Isuzu"]]];
+        var newcars = ["Saab", "Volvo", "BMW", ["Honda", "Toyota", ["Lexus",
+            "Volvo", "Lada"], "Hyunday", "Volvo"]];
+        buddies = [{
+            firstName: "Jonny", lastName: "Rambo",
+            car: "BMW"
+        }, {
+            firstName: "Arnold", lastName: "Suarchenager",
+            car: "Honda"
+        }, {
+            firstName: "Chuck", lastName: "Norris",
+            car: "Honda"
+        }, {
+            firstName: "Yakie", lastName: "Chang",
+            car: "BMW"
+        }, {
+            firstName: "Bruce", lastName: "Lee",
+            car: "Honda"
+        }, { firstName: "Steven", lastName: "Seagal", car: "Lada" }];
+
+        let xungas = ["Honda", "Lada"]
+
+        //EJERCICIO 1
+        console.log(newcars.flat(Infinity).filter(e => e == "Volvo").length);
+
+        //EJERCICIO 2
+        let trendy = [];
+        let recuento = buddies.map(valor => {
+            let objeto = new Object();
+            objeto.marca = valor.car;
+            objeto.cuantos = buddies.filter(f => f.car == valor.car).length;
+            return objeto;
+        });
+        recuento = recuento.filter(e => e.cuantos > 1).map(t => {
+            trendy.push(t.marca);
+        });
+        console.log(trendy);
+
+        //EJERCICIO 2B
+        let contador = buddies.map((e) => { buddies.filter(f => f.car == e.car) }).length;
+        let array_marcas;
+        console.log(contador);
+
+        //EJERCICIO 3
+        newcars = newcars.flat(Infinity);
+        buddies.map(b => {
+            if (xungas.filter(x => x == b.car).length == 0 && newcars.filter(n => n == b.car).length > 0) {
+                console.log(b.car);
+            }
+        });
+
+        //EJERCICIO 4
+        let max = 0;
+        let marca = "";
+        buddies.map(valor => {
+            let cuantos = buddies.filter(f => f.car == valor.car).length;
+            if (cuantos > max) {
+                max = cuantos;
+                marca = valor.car;
+            }
+        });
+        console.log(marca + " aparece " + max + " veces");
+
+    </script>
+</body>
+
+</html>

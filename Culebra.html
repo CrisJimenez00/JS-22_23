@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <!DOCTYPE html>
+    <html>
+
+    <body>
+        <h2>kulevrilla Zostérica</h2>
+        <script>
+            var arr = [[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", "*", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+
+            ];
+            function generateRandomInt(min, max) {
+                return Math.floor((Math.random() * (max - min)) + min);
+            }
+
+
+            console.log(arr);
+            function comprobacionCulebrilla(fila, columna) {
+                if (arr[fila][columna] == "*") {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            let f = 0; let c = 0;
+            function comienzo() {
+                for (let i = 0; i < arr.length; i++) {
+                    for (let j = 0; j < arr[fila].length; j++) {
+                        if (arr[i][j] == "*") {
+                            f = i;
+                            c = j;
+                        }
+                    }
+                }
+            }
+            function culebrilla(fila, columna) {
+                arr[fila][columna] = "*";
+                let pila = [];
+
+                //Ejemplo de hacerlo
+                //Norte
+                if (fila > 0 && arr[fila - 1][columna] != "*" && alrededor(fila - 1, columna) == 1) {
+                    pila.push("N");
+                }
+                //Sur
+                if (fila < arr.length - 1 && arr[fila + 1][columna] != "*" && alrededor(fila + 1, columna) == 1) {
+                    pila.push("S");
+                }
+                //Este
+                if (columna < arr[fila].length - 1 && arr[fila][columna + 1] != "*" && alrededor(fila + 1, columna) == 1) {
+                    pila.push("E");
+                }
+                //Oeste
+                if (columna > 0 && arr[fila][columna - 1] != "*" && alrededor(fila, columna - 1) == 1) {
+                    pila.push("O");
+                }
+                console.log(pila);
+                if (pila.length > 0) {
+                    let n = generateRandomInt(0, pila.length);
+                    let next = pila[n];
+                    let newFila = fila;
+                    let newColumna = columna;
+                    switch (next) {
+                        case "N": newFila--;
+                            break;
+                        case "S": newFila++;
+                            break;
+                        case "E": newColumna++;
+                            break;
+                        case "O": newColumna--;
+                            break;
+                    }
+
+                    culebrilla(newFila, newColumna);
+                }
+
+
+
+                /*  Mi forma de hacerlo
+                var aleatorio = generateRandomInt(1, 4);
+                switch (aleatorio) {
+                    case 1:
+                        if (contador < 2) {
+                            if (x - 1 >= 0) {
+                                arr[x - 1][columna] = "*";
+                                culebrilla(x - 1, columna);
+                            }
+                        } else {
+                            console.log("Perdiste.");
+                        }
+
+                        break;
+                    case 2:
+                        if (contador < 2) {
+                            if (columna - 1 >= 0) {
+                                arr[x][columna - 1] = "*";
+                                culebrilla(x, columna - 1);
+                            }
+                        } else {
+                            console.log("Perdiste.");
+                        }
+
+                        break;
+                    case 3:
+                        if (contador < 2) {
+                            if (columna + 1 < arr.length) {
+                                arr[x][columna + 1] = "*";
+                                culebrilla(x, columna + 1);
+                            }
+                        } else {
+                            console.log("Perdiste.");
+                        }
+
+
+                        break;
+                    case 4:
+                        if (contador < 2) {
+                            if (x + 1 < arr.lenght) {
+                                arr[x + 1][columna] = "*";
+                                culebrilla(x + 1, columna);
+                            }
+                        } else {
+                            console.log("Perdiste.");
+                        }
+
+                        break;
+                }*/
+
+            }
+            //x = fila, columna = columna
+            function alrededor(fila, columna) {
+                let cuantos = 0;
+                //Norte
+                if (fila > 0 && arr[fila - 1][columna] == "*") {
+                    cuantos++;
+                }
+                //Sur
+                if (fila < arr.length - 1 && arr[fila + 1][columna] == "*") {
+                    cuantos++;
+                }
+                //Este
+                if (columna < arr[fila].length - 1 && arr[fila][columna + 1] == "*") {
+                    cuantos++;
+                }
+                //Oeste
+                if (columna > 0 && arr[fila][columna - 1] == "*") {
+                    cuantos++;
+                }
+                return cuantos;
+            }
+            culebrilla(f, c);
+
+        </script>
+    </body>
+
+    </html>

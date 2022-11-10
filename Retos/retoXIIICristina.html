@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confinaman</title>
+</head>
+
+<body>
+    <ol id="lista1">
+        <li>Perico</li>
+        <li>Juanico</li>
+        <ul>
+            <li>Jose</li>
+            <ul>
+                <li>Roman</li>
+                <li>Marco</li>
+                <li>Rodrigo</li>
+            </ul>
+            <li>Jose</li>
+            <li>Lorenzo</li>
+            <ul>
+                <li>Dimas</li>
+                <li>Gestas</li>
+                <li>Malakatos</li>
+                <li>Jose</li>
+            </ul>
+        </ul>
+        <li>Sofoclis</li>
+    </ol>
+
+    <ol id="lista2">
+        <li>Periquin</li>
+        <li>Juanele</li>
+        <li>Jose</li>
+    </ol>
+    <script>
+        const confina = (obj) => {
+            Array.from(obj.parentNode.children).map(hijo => {
+                if (hijo.tagName == 'LI') hijo.innerHTML += "(C)"
+            })
+        }
+
+        const recorre = (obj) => {
+            if (obj.tagName == "LI") {
+                recorre2(document.getElementById("lista1"), obj.innerHTML);
+            } else {
+                Array.from(obj.children).map((e) => recorre(e));
+            }
+        };
+        const recorre2 = (obj, nombre) => {
+            if (obj.tagName == "LI") {
+                if (obj.innerHTML.toUpperCase() == nombre.toUpperCase()) {
+                    //console.log(nombre+" Encontrado");
+                    confina(obj)
+                }
+            } else {
+                Array.from(obj.children).map((e) => recorre2(e, nombre));
+            }
+        }
+        recorre(document.getElementById("lista2"));
+    </script>
+</body>
+
+</html>
